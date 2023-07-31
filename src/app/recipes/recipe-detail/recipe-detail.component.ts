@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../recipe-list/reipe.model';
+import { Recipe } from '../recipe.model';
+import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -8,4 +9,10 @@ import { Recipe } from '../recipe-list/reipe.model';
 })
 export class RecipeDetailComponent {
   @Input() itemRecipe!: Recipe;
+
+  constructor(private ssl: ShoppingListService) {}
+
+  onAddToShoppingList() {
+    this.ssl.addIngredientToShopping(this.itemRecipe.ingredients);
+  }
 }
